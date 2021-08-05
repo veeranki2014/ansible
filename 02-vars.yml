@@ -2,12 +2,12 @@
   hosts: all
   vars:
     URL: play.google.com
-  tasks:
+#  tasks:
     - name: Print a play variable
       ansible.builtin.debug:
         msg: "URL = {{URL}}"
 
- #   - name: Print task Variable
+    - name: Print task Variable
       ansible.builtin.debug:
         msg: "URL = {{URL}}"
       vars:
