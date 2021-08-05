@@ -15,9 +15,9 @@
 
 ###when there is variable reference(Calling variable), Double quote it.
 
-- name: Demo on variables
+- name: Demo on Invenotry variables
   hosts: all
   tasks:
-    - name: Print a variable from Inventory file
+    - name: Print a variable
       ansible.builtin.debug:
         msg: "URL = {{URL}}"
