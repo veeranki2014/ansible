@@ -1,0 +1,11 @@
+- name: Demo on variable
+  hosts: all
+  vars:
+    URL: google.com
+  tasks:
+    -name: Print a variable
+     debug:
+       msg: "URL = {{URL}}"
+
+###when there is variable reference(Calling variable), Double quote it.
+
