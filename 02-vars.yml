@@ -30,3 +30,10 @@
     - name: Print a variable
       ansible.builtin.debug:
         msg: "URL = {{URL}}"
+
+- name: Ankarao
+  hosts: all
+  tasks:
+    - name: Print a Name
+      debug:
+        msg: "Name = Ankarao"
