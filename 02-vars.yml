@@ -43,12 +43,21 @@
   hosts: all
   tasks:
     - name: Run uptime command
-     ansible.builtin.shell: uptime
-     register: out
+      ansible.builtin.shell: uptime
+      register: out
 
-     - name: print output
-       ansible.builtin.debug:
+    - name: set a facts to variable
+      ansible.builtin.set_facts:
+        UPTIME: {{out.stdout}}
+
+###Rigistry Example_ retriving data from  out variable.
+    - name: print output
+      ansible.builtin.debug:
          msg: "register = {{out}}"
 
+### This is for Set_facts Example
+    - name: print output
+      ansible.builtin.debug:
+        msg: "{{UPTIME}}"
 
 
