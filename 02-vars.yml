@@ -14,6 +14,7 @@
         URL: task.google.com
 
 ###when there is variable reference(Calling variable), Double quote it.
+### command line has high priotiry and -e URL=comm.google.com
 
 - name: Demo on Invenotry variables
   hosts: all
@@ -31,9 +32,3 @@
       ansible.builtin.debug:
         msg: "URL = {{URL}}"
 
-- name: Ankarao
-  hosts: all
-  tasks:
-    - name: Print a Name
-      debug:
-        msg: "Name = Ankarao nagu vayshu sai"
