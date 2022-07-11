@@ -3,10 +3,9 @@
   become: yes
   ## Here all tasks run as root user
   tasks:
-  yum:
-    -name: install nodejs
+   - name: install nodejs
      become: yes
      ## This makes only this task to run as root
      ansible.builtin.yum:
        name: nodejs
-       state: present
+       state: installed
