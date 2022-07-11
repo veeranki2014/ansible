@@ -1,4 +1,4 @@
 - name: Roboshop Setup
   hosts: all
   roles:
-   - name: fronend
+   - name: frontend
