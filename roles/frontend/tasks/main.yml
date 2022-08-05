@@ -11,7 +11,7 @@
 - name: Download and Extract Frontend Content
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-    dest: /usr/share/nginx/html
+    dest: /tmp
     remote_src: yes
 
 - name: copy the extracted content
@@ -19,3 +19,13 @@
     src: /tmp/frontend-main/static
     dest: /usr/share/nginx/html
     remote_src: yes
+
+- name: copy roboshop configuration file
+  copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: restart Nginx Service
+  systemd:
+    name: nginx
+    enabled: yes
