@@ -9,7 +9,7 @@
 
 - name: Download from GitHub
   ansible.builtin.include_tasks:
-    file: download-from-github.yml
+    file: download
 
 - name: copy the extracted content
   ansible.builtin.copy:
