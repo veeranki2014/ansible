@@ -8,11 +8,10 @@
     path: /usr/share/nginx/html
     state: absent
 
-- name: Download and Extract Frontend Content
-  ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-    dest: /tmp
-    remote_src: yes
+- name: download and extract
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
 
 - name: copy the extracted content
   ansible.builtin.copy:

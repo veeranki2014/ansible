@@ -21,10 +21,9 @@
     enabled: yes
 
 - name: download and extract
-  ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
-    dest: /tmp
-    remote_src: yes
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
 
 - name: cataloque schema loading for MongoDB commands with pseudo-idempotency
   community.mongodb.mongodb_shell:
