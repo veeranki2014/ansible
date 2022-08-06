@@ -25,19 +25,24 @@
     name: common
     tasks_from: download
 
-#- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
-#  community.mongodb.mongodb_shell:
-#    file: "/tmp/mongodb-main/catalogue.js"
-#    idempotent: yes
-
-#Example of simple loop
-- name: schema loading for MongoDB
+- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
   community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/{{item}}.js"
+    file: "/tmp/mongodb-main/catalogue.js"
     idempotent: yes
-    loop:
-      - cataloque
-      - users
+
+- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/users.js"
+    idempotent: yes
+
+##Example of simple loop
+#- name: schema loading for MongoDB
+#  community.mongodb.mongodb_shell:
+#    file: "/tmp/mongodb-main/{{item}}.js"
+#    idempotent: yes
+#    loop:
+#      - cataloque
+#      - users
 
 ##Example of map loop(demo purpose)
 #- name: schema loading for MongoDB
