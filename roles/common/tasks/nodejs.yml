@@ -1,6 +1,6 @@
 -name: Install NodeJS
  ansible.builtin.yum:
-   name: ["nodejs", "make", "gcc-c++"]
+   name: ["nodejs","make","gcc-c++"]
    state: present
 
 - name: Add the user 'roboshop'
