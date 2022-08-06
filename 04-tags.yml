@@ -4,7 +4,13 @@
    - name: ubuntu task
      ansible.builtin.debug:
        msg: Ubutun task
+     tags:
+       - Ubuntu
+       - Debian
 
    - name: CentOS Task
      ansible.builtin.debug:
        msg: CentOS Task
+     tags:
+       - CentOS
+       - Redhat
