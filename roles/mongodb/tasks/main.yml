@@ -16,7 +16,7 @@
 
 - name: start MangoDB Services.
   ansible.builtin.systemd:
-    name: mangod
+    name: mongod
     state: started
     enabled: yes
 
