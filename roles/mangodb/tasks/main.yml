@@ -28,12 +28,12 @@
 
 - name: cataloque schema loading for MongoDB commands with pseudo-idempotency
   community.mongodb.mongodb_shell:
-    file: "cd /tmp/mongodb-main/catalogue.js"
+    file: "/tmp/mongodb-main/catalogue.js"
     idempotent: yes
 
 - name: user schema loading for MongoDB commands with pseudo-idempotency
   community.mongodb.mongodb_shell:
-    file: "cd /tmp/mongodb-main/catalogue.js"
+    file: "/tmp/mongodb-main/users.js"
     idempotent: yes
 
 

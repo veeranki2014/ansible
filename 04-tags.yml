@@ -1,0 +1,10 @@
+- name : Demo on Tags
+  hosts: localhost
+  tasks:
+   - name: ubuntu task
+     ansible.builtin.debug:
+      msg: Ubutun task
+
+   - name: CentOS Task
+        ansible.builtin.debug:
+         msg: CentOS Task
