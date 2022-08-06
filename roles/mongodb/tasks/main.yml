@@ -4,9 +4,9 @@
     dest: /etc/yum.repos.d/mongo.repo
 
 - name: Install MangoDB
-    ansible.builtin.yum:
-      name: mongodb-org
-      state: present
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: present
 
 - name: Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
   ansible.builtin.replace:
@@ -15,16 +15,16 @@
     replace: '0.0.0.0'
 
 - name: start MangoDB Services.
-    ansible.builtin.systemd:
-      name: mangod
-      state: started
-      enabled: yes
+  ansible.builtin.systemd:
+    name: mangod
+    state: started
+    enabled: yes
 
 - name: download and extract
-    ansible.builtin.unarchive:
-      src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
-      dest: /tmp
-      remote_src: yes
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
+    dest: /tmp
+    remote_src: yes
 
 - name: cataloque schema loading for MongoDB commands with pseudo-idempotency
   community.mongodb.mongodb_shell:
