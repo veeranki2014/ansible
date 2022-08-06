@@ -3,8 +3,8 @@
   tasks:
    - name: ubuntu task
      ansible.builtin.debug:
-      msg: Ubutun task
+       msg: Ubutun task
 
    - name: CentOS Task
-        ansible.builtin.debug:
-         msg: CentOS Task
+     ansible.builtin.debug:
+       msg: CentOS Task
