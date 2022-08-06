@@ -10,4 +10,4 @@
   become: yes
   tags: mongodb
   roles:
-   - name: frontend
+   - name: mongodb
