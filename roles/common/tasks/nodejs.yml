@@ -1,23 +1,4 @@
 - name: Install NodeJS
- ansible.builtin.yum:
-   name:
-     - nodejs
-     - make
-     - gcc-c++
- state: present
-
-#- name: Add the user 'roboshop'
-#  ansible.builtin.user:
-#   name: roboshop
-#
-#- name: Download from GitHub
-#  ansible.builtin.include_tasks:
-#   file: download-from-github.yml
-#
-#- name: copy the extracted content
-#  ansible.builtin.copy:
-#   src: /tmp/catalogue-main/
-#   dest: /home/roboshop/catalogue/
-#   remote_src: yes
-#   owner: roboshop
-#   group: roboshop
+  yum:
+    name: [ "nodejs", "make", "gcc-c++" ]
+    state: present
