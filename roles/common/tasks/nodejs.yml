@@ -22,5 +22,5 @@
 - name: Install Cataloque Dependencies
   community.general.npm:
     path: /home/roboshop/catalogue
-    state: present
-    become_user: roboshop
+    state: latest
+  become_user: roboshop
