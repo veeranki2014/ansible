@@ -28,4 +28,4 @@
   systemd:
     name: nginx
     enabled: yes
-    state: restarted
+    state: started
