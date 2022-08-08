@@ -18,3 +18,8 @@
     remote_src: yes
     owner: roboshop
     group: roboshop
+
+- name: Install Cataloque Dependencies
+  community.general.npm:
+    path: /home/roboshop/catalogue
+    state: present
