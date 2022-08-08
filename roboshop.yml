@@ -12,9 +12,9 @@
   roles:
    - name: mongodb
 
-- name: Roboshop Setup For CATALOGUE
+- name: Roboshop Setup For CATALOQUE
   hosts: CATALOGUE
   become: yes
-  tags: catalogue
+  tags: cataloque
   roles:
-   - name: catalogue
+   - name: cataloque
