@@ -13,7 +13,7 @@
    - name: mongodb
 
 - name: Roboshop Setup For CATALOQUE
-  hosts: CATALOGUE
+  hosts: CATALOQUE
   become: yes
   tags: cataloque
   roles:
