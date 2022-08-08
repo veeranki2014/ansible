@@ -18,3 +18,17 @@
   tags: cataloque
   roles:
    - name: cataloque
+
+- name: Roboshop Setup For REDIS
+  hosts: REDIS
+  become: yes
+  tags: redis
+  roles:
+   - name: redis
+
+- name: Roboshop Setup For USER
+  hosts: USER
+  become: yes
+  tags: user
+  roles:
+   - name: user

@@ -13,14 +13,26 @@
 
 - name: copy the extracted content
   ansible.builtin.copy:
-    src: /tmp/catalogue-main/
-    dest: /home/roboshop/catalogue/
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
     remote_src: yes
     owner: roboshop
     group: roboshop
 
-- name: Install Cataloque Dependencies
+- name: Install {{COMPONENT}} Dependencies
   community.general.npm:
-    path: /home/roboshop/catalogue
+    path: /home/roboshop/{{COMPONENT}}
     state: latest
   become_user: roboshop
+
+- name: update SystemD Configuratin.
+  copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restart {{COMPONENT}} service
+  systemd:
+    name: "{{COMPONENT}}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
