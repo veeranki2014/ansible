@@ -37,21 +37,17 @@
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
-- name: print
-  debug:
-    msg: "{{app_user}}"
-
 - name: Update INI file
-  replace:
+  lineinfile:
     path: /home/robosho/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: "^uid"
-    replace: "uid = ????"
+    line: "uid = {{app_user.uid}}"
 
 - name: Update INI file
-  replace:
+  lineinfile:
     path: /home/robosho/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: "^gid"
-    replace: "gid = ????"
+    line: "gid = {{app_user.group}}"
 
 - name: Setup SystemD
   ansible.builtin.include_tasks:
