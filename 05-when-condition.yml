@@ -18,3 +18,8 @@
       when: a == 10
       debug:
         msg: Hellooo Numbers
+
+    - name: Condition on not equal Numbers
+      when: a != 10
+      debug:
+        msg: Hellooo Numbers
