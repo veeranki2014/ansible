@@ -26,18 +26,15 @@
     name: maven
     state: present
 
-- name: Add the user 'roboshop'
-  ansible.builtin.user:
-    name: roboshop
-
-- name: Download from GitHub
+- name: Download from App Code & App User
   ansible.builtin.include_tasks:
     file: download.yml
 
-- name: copy the extracted content
-  ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}/
-    remote_src: yes
-    owner: roboshop
-    group: roboshop
+- name: compile the packages (mvn clean package)
+  shell: mvn clean package && mv target/shipping-1.0.jar shipping.jar
+    args:
+        chdir: /home/roboshop/{{COMPONENT}}
+
+- name: Setup SystemD
+  ansible.builtin.include_tasks:
+    file: setup-systemd.yml
