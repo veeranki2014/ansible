@@ -41,6 +41,6 @@
         msg: Helloooo B DECLARED
 
     - name: Run if VARIABLE B is not defined and a is less than or equal to 10(Multi condition)
-      when: B is defined and a <= 10
+      when: B is not defined and a <= 10
       debug:
         msg: Helloooo B DECLARED
