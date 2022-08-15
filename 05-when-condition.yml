@@ -2,13 +2,19 @@
   hosts: localhost
   vars:
     URL: google.org
+    a: 10
   tasks:
     - name: Condition on Strings
       when: URL == "google.com"
       debug:
-        msg: Hellooo
+        msg: Hellooo Strings
 
     - name: Condition on not equal Strings
       when: URL != "google.com"
       debug:
-        msg: Hellooo
+        msg: Hellooo Strings
+
+    - name: Condition on Numbers
+      when: a == 10
+      debug:
+        msg: Hellooo Numbers
