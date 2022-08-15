@@ -33,7 +33,7 @@
 - name: compile the packages (mvn clean package)
   shell: mvn clean package && mv target/shipping-1.0.jar shipping.jar
     args:
-        chdir: /home/roboshop/{{COMPONENT}}
+      chdir: /home/roboshop/{{COMPONENT}}
 
 - name: Setup SystemD
   ansible.builtin.include_tasks:
