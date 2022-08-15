@@ -45,6 +45,11 @@
     login_password: RoboShop@1
   ignore_errors: yes
 
+- name: download and extract
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
 
 
 
