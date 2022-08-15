@@ -31,6 +31,6 @@
         msg: Hellooo Numbers
 
     - name: Run if Action is true
-      when: not Action
+      when: not ACTION
       debug:
         msg: Helloooo boolean
