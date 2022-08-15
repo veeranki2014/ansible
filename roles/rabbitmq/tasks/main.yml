@@ -12,18 +12,18 @@
     state: present
 
 - name: Setup YUM repositories for RabbitMQ
-    shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+  shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
 
 - name: Install RabbitMQ
-    yum:
-      name: rabbitmq-server
-      state: present
+  yum:
+    name: rabbitmq-server
+    state: present
 
 - name: Start RabbitMQ
-    systemd:
-      name: rabbitmq-server
-      state: started
-      enabled: yes
+  systemd:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
 
 - name: Create App User in Roboshop
   community.rabbitmq.rabbitmq_user:
