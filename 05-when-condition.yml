@@ -4,6 +4,6 @@
     URL: google.com
   tasks:
     - name: Condition on Strings
-      when: URL == "google.com
+      when: URL == "google.com"
       debug:
         msg: Hellooo
