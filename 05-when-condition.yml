@@ -8,7 +8,7 @@
       debug:
         msg: Hellooo
 
-    - name: Condition on Strings
+    - name: Condition on not equal Strings
       when: URL != "google.com"
       debug:
         msg: Hellooo
