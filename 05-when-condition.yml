@@ -11,9 +11,9 @@
         msg: Hellooo Strings
 
     - name: Condition on not equal Strings
-      when: URL != "google.com"
       debug:
         msg: Hellooo Strings
+      when: URL != "google.com"
 
     - name: Condition on Numbers
       when: a == 10
