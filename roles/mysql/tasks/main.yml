@@ -25,9 +25,9 @@
 #  register: default_mysql_check
 #  ignore_errors: yes
 
-- name: Print
-  debug:
-    msg: "{{default_mysql_check}}"
+#- name: Print
+#  debug:
+#    msg: "{{default_mysql_check}}"
 
 - name: Grab Default MySQL Password
   when: default_mysql_check.failed
