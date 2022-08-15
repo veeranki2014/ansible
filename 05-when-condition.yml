@@ -3,6 +3,7 @@
   vars:
     URL: google.org
     a: 10
+    ACTION: true
   tasks:
     - name: Condition on Strings
       when: URL == "google.com"
@@ -23,3 +24,13 @@
       when: a != 10
       debug:
         msg: Hellooo Numbers
+
+    - name: Condition on not equal Numbers
+      when: a <= 10
+      debug:
+        msg: Hellooo Numbers
+
+    - name: Run if Action is true
+      when: not Action
+      debug:
+        msg: Helloooo boolean
