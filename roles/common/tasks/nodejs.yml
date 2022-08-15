@@ -1,6 +1,9 @@
+- name: Install NodeJS Repos Script
+  shell: curl -sL https://rpm.nodesource.com/setup_lts.x | sudo bash
+
 - name: Install NodeJS
   yum:
-    name: [ "nodejs", "make", "gcc-c++" ]
+    name: [ "nodejs" ]
     state: present
 
 - name: Add the user 'roboshop'
