@@ -34,3 +34,8 @@
       when: not ACTION
       debug:
         msg: Helloooo boolean
+
+    - name: Run if VARIABLE B is DECLARED.
+      when: B is defined
+      debug:
+        msg: Helloooo B DECLARED
