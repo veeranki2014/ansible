@@ -34,6 +34,9 @@
   shell: grep 'A temporary password' /var/log/mysqld.log  | awk '{print $NF}'
   register: out
 
+- name: Reset MySQL password
+  shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p"{{out.stdout}}"
+
 
 
 
