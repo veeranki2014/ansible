@@ -5,6 +5,7 @@
 - name: Add the user 'roboshop'
   ansible.builtin.user:
     name: roboshop
+  register: app_user
 
 - name: Delete Old App Code
   file:
