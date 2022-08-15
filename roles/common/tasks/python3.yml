@@ -45,7 +45,7 @@
 
 - name: Update INI file
   lineinfile:
-    path: /home/robosho/{{COMPONENT}}/{{COMPONENT}}.ini
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: "^gid"
     line: "gid = {{app_user.group}}"
 
