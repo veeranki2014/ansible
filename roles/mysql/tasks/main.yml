@@ -1,0 +1,32 @@
+- name: Setup MySQL Repo
+  shell: curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+
+- name: Install MySQL
+  yum:
+    name: [ "mysql-community-server" ]
+    state: present
+- name: start MySQL services
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
+
+
+
+
+#1. Setup MySQL Repo
+#
+#```bash
+#  # curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+#```
+#
+#1. Install MySQL
+#
+#```bash
+#  # yum install mysql-community-server -y
+#```
+#
+#1. Start MySQL.
+# systemctl enable mysqld
+# systemctl start mysqld
