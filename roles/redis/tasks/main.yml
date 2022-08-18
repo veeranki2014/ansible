@@ -1,13 +1,16 @@
-- name: Configure Redis Repos
+- name: Enable Redis Repos
+  shell: curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+
+- name: Insall Redis Repos
   yum:
-    name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    name: redis-6.2.7
     state: present
 
-- name: Install Redis
-  yum:
-    name: redis
-    enablerepo: remi
-    state: present
+#- name: Install Redis
+#  yum:
+#    name: redis
+#    enablerepo: remi
+#    state: present
 
 - name: Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
   ansible.builtin.replace:
@@ -20,3 +23,7 @@
     name: redis
     enabled: yes
     state: restarted
+
+
+# curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo
+# yum install redis-6.2.7 -y
