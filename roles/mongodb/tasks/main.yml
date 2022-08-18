@@ -1,7 +1,9 @@
-- name: Create a MongoDB repo
-  copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
+#- name: Create a MongoDB repo
+#  copy:
+#    src: mongo.repo
+#    dest: /etc/yum.repos.d/mongo.repo
+- name: Create a MongoDB Repo
+  shell: curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 
 - name: Install MongoDB
   yum:
