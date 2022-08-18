@@ -3,55 +3,82 @@
     src: mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
 
-- name: Install MangoDB
-  ansible.builtin.yum:
+- name: Install MongoDB
+  yum:
     name: mongodb-org
     state: present
 
-- name: Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
+- name: Update MongoDB Listen Address
   ansible.builtin.replace:
-    path: /etc/mongod.conf
+    path:  /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
-- name: start MangoDB Services.
-  ansible.builtin.systemd:
+- name: Start MongoDB service
+  systemd:
     name: mongod
     state: started
-    enabled: yes
 
-- name: download and extract
-  ansible.builtin.include_role:
+- name: Download and Extract Frontend content
+  include_role:
     name: common
     tasks_from: download
 
-- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
+- name: Load Schema
   community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/catalogue.js"
+    file: "/tmp/mongodb-main/{{item}}.js"
     idempotent: yes
+  loop:
+    - catalogue
+    - users
 
-- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
-  community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/users.js"
-    idempotent: yes
-
-##Example of simple loop
-#- name: schema loading for MongoDB
-#  community.mongodb.mongodb_shell:
-#    file: "/tmp/mongodb-main/{{item}}.js"
-#    idempotent: yes
-#    loop:
-#      - cataloque
-#      - users
-
-##Example of map loop(demo purpose)
-#- name: schema loading for MongoDB
+#- name: Load Schema
 #  community.mongodb.mongodb_shell:
 #    file: "/tmp/mongodb-main/{{item.name}}.js"
 #    idempotent: "{{item.idempotency}}"
-#    loop:
-#      - {name: "cataloque", idempotency: yes}
-#      - {name: "users", idempotency: yes}
+#  loop:
+#    - {name: "catalogue", idempotency: yes}
+#    - {name: "users", idempotency: yes}
 
 
 
+#- name: Create a MongoDB repo
+#  copy:
+#    src: mongo.repo
+#    dest: /etc/yum.repos.d/mongo.repo
+#
+#- name: Install MangoDB
+#  ansible.builtin.yum:
+#    name: mongodb-org
+#    state: present
+#
+#- name: Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
+#  ansible.builtin.replace:
+#    path: /etc/mongod.conf
+#    regexp: '127.0.0.1'
+#    replace: '0.0.0.0'
+#
+#- name: start MangoDB Services.
+#  ansible.builtin.systemd:
+#    name: mongod
+#    state: started
+#    enabled: yes
+#
+#- name: download and extract
+#  ansible.builtin.include_role:
+#    name: common
+#    tasks_from: download
+#
+#- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
+#  community.mongodb.mongodb_shell:
+#    file: "/tmp/mongodb-main/catalogue.js"
+#    idempotent: yes
+#
+#- name: cataloque schema loading for MongoDB commands with pseudo-idempotency
+#  community.mongodb.mongodb_shell:
+#    file: "/tmp/mongodb-main/users.js"
+#    idempotent: yes
+#
+#
+#
+#
