@@ -19,8 +19,14 @@
     dest: /usr/share/nginx/html/
     remote_src: yes
 
-- name: copy roboshop configuration file
-  copy:
+# this example copy is for files, but it doesn't support for multi-env
+#- name: copy roboshop configuration file
+#  copy:
+#    src: roboshop.conf
+#    dest: /etc/nginx/default.d/roboshop.conf
+
+- name: upload roboshop configuration file
+  template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 

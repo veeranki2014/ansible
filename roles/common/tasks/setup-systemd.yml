@@ -1,5 +1,6 @@
 - name: update SystemD Configuratin.
-  copy:
+  ##copy:   ##Files replace by template to support multi-environemt like DeV and Prod.
+  template:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
   notify: Restart service - Handlers

@@ -8,20 +8,20 @@ resource "aws_spot_instance_request" "cheap_worker" {
   wait_for_fulfillment    = true
 
   tags                    = {
-    Name                  = element(var.COMPONENTS,count.index )
+    Name                  = "${element(var.COMPONENTS,count.index )}-${var.ENV}"
   }
 }
 
-resource "aws_ec2_tag" "name-tag" {
+/*resource "aws_ec2_tag" "name-tag" {
   count                   = local.LENGTH
   resource_id             = element(aws_spot_instance_request.cheap_worker.*.spot_instance_id, count.index)
   key                     = "Name"
   value                   = element(var.COMPONENTS,count.index)
-}
+}*/
 
 resource "aws_route53_record" "records" {
   count                   = local.LENGTH
-  name                    = element(var.COMPONENTS,count.index )
+  name                    = "{element(var.COMPONENTS,count.index )}-${var.ENV}"
   type                    = "A"
   zone_id                 = "Z02280072PQMTU5GAFQA"
   ttl                     = 300
