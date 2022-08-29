@@ -26,6 +26,16 @@
         dest: /opt/node_exporter/
         remote_src: yes
 
+- name: setup Node Exporter Service
+  copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+
+- name: Start Node Exporter Service
+  systemd:
+    name: node_exporter
+    state: started
+
 
 
 
