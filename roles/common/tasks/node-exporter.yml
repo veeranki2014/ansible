@@ -9,7 +9,7 @@
 
 - name: debug
   debug:
-    msg: "{{NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz', ' ') }}"
+    msg: "{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz', '') }}"
 
 #- name: Download and Extract
 #  ansible.builtin.unarchive:
