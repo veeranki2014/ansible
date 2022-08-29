@@ -11,17 +11,20 @@
   debug:
     msg: "{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz','') }}"
 
-#- name: Download and Extract
-#  ansible.builtin.unarchive:
-#    src: "https://github.com/prometheus/node_exporter/releases/download/v1.4.0-rc.0/node_exporter-1.4.0-rc.0.linux-amd64.tar.gz"
-#    dest: /tmp
-#    remote_src: yes
-#
-#- name: copy Node Exporter to /opt
-#  copy:
-#    src: /tmp/node_exporter-1.4.0-rc.0.linux-amd64
-#    dest: /opt/node_exporter
-#    remote_src: yes
+- name: Install Node Exporter
+  when: not out.stat.exists
+  block:
+    - name: Download and Extract
+      ansible.builtin.unarchive:
+        src: "{{NODE_EXPORTER_URL}}"
+        dest: /tmp
+        remote_src: yes
+
+    - name: copy Node Exporter to /opt
+      copy:
+        src: /tmp/"{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz','') }}"
+        dest: /opt/node_exporter
+        remote_src: yes
 
 
 
