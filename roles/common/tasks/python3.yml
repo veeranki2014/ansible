@@ -52,3 +52,7 @@
 - name: Setup SystemD
   ansible.builtin.include_tasks:
     file: setup-systemd.yml
+
+- name: Install node_exporter
+  ansible.builtin.include_tasks:
+    file: node-exporter.yml

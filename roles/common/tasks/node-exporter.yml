@@ -3,13 +3,13 @@
     path: /opt/node_exporter
   register: out
 
-- name: debug
-  debug:
-    msg: "{{out}}"
+#- name: debug
+#  debug:
+#    msg: "{{out}}"
 
-- name: debug
-  debug:
-    msg: "{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz','') }}"
+#- name: debug
+#  debug:
+#    msg: "{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gz','') }}"
 
 - name: Install Node Exporter
   when: not out.stat.exists
