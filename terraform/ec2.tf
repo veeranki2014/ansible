@@ -57,16 +57,17 @@ resource "aws_route53_record" "db_records" {
   filename = "/tmp/inv-roboshop"
 }*/
 
-##Approach one##############
+##  Approach one ##############
 /*resource "local_file" "inventory-file" {
   content  = "[FRONTEND]\n${aws_spot_instance_request.app_cheap_worker.*.private_ip[5]}\n[PAYMENT]\n${aws_spot_instance_request.app_cheap_worker.*.
   private_ip[4]}\n[SHIPPING]\n${aws_spot_instance_request.app_cheap_worker.*.private_ip[3]}\n[USER]\n${aws_spot_instance_request.app_cheap_worker.*.
   private_ip[2]}\n[CATALOGUE]\n${aws_spot_instance_request.app_cheap_worker.*.private_ip[1]}\n[CART]\n${aws_spot_instance_request.app_cheap_worker.*.
   private_ip[0]}\n[REDIS]\n${aws_spot_instance_request.db_cheap_worker.*.private_ip[3]}\n[RABBITMQ]\n${aws_spot_instance_request.db_cheap_worker.*.
   private_ip[2]}\n[MONGODB]\n${aws_spot_instance_request.db_cheap_worker.*.private_ip[1]}\n[MYSQL]\n${aws_spot_instance_request.db_cheap_worker.*.private_ip[0]}"
-  filename = "/tmp/inv-roboshop"
+  filename = "/tmp/inv-roboshop-${var.ENV}"
 }*/
 
+## Approach TWO ##############
 locals {
   COMPONENTS = concat(aws_spot_instance_request.db_cheap_worker.*.private_ip, aws_spot_instance_request.app_cheap_worker.*.private_ip)
 }
