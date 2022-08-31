@@ -1,5 +1,5 @@
 # Request a spot instance at $0.03
-resource "aws_spot_instance_request" "app_cheap_worker" {
+/*resource "aws_spot_instance_request" "app_cheap_worker" {
   count                   = length(var.APP_COMPONENTS)
   ami                     = "ami-0bb6af715826253bf"
   spot_price              = "0.0031"
@@ -11,25 +11,18 @@ resource "aws_spot_instance_request" "app_cheap_worker" {
       Monitor               = "yes"
     }
 
-}
+}*/
 
-resource "aws_ec2_tag" "app-name-tag" {
-  #count                     = length(var.APP_COMPONENTS)
+/*resource "aws_ec2_tag" "app-name-tag" {
+  count                     = length(var.APP_COMPONENTS)
   for_each                  = { "Name" : "${element(var.APP_COMPONENTS,count.index)}-${var.ENV}", "Monitor" : "yes" }
   resource_id               = element(aws_spot_instance_request.app_cheap_worker.*.spot_instance_id, count.index)
   key                       = each.key
   value                     = each.value
-}
-
-/*resource "aws_ec2_tag" "example" {
-  for_each = { "Name" : "MyAttachment", "Owner" : "Operations" }
-
-  resource_id = aws_vpn_connection.example.transit_gateway_attachment_id
-  key         = each.key
-  value       = each.value
 }*/
 
-resource "aws_spot_instance_request" "db_cheap_worker" {
+
+/*resource "aws_spot_instance_request" "db_cheap_worker" {
   count                   = length (var.DB_COMPONENTS)
   ami                     = "ami-0bb6af715826253bf"
   spot_price              = "0.0031"
@@ -39,15 +32,29 @@ resource "aws_spot_instance_request" "db_cheap_worker" {
     tags                    = {
       Name                  = "${element(var.DB_COMPONENTS,count.index )}-${var.ENV}"
     }
+}*/
+
+resource "aws_instance" "app-instances" {
+  count                       = length(var.APP_COMPONENTS)
+  ami                         = "ami-0bb6af715826253bf"
+  instance_type               = "t3.micro"
+  vpc_security_group_ids      = ["sg-0bcba096b73fa353d"]
+  tags                      = {
+    Name                    = "${element(var.APP_COMPONENTS, count.index)}-${var.ENV}"
+    Monitor                 = "yes"
+  }
 }
 
-/*resource "aws_ec2_tag" "db-name-tag" {
-  count                     = length(var.DB_COMPONENTS)
-  resource_id               = element(aws_spot_instance_request.db_cheap_worker.*.spot_instance_id, count.index)
-  tags                      = {
-    Name                    = "${element(var.DB_COMPONENTS, count.index)}-${var.ENV}"
+resource "aws_instance" "db-instances" {
+  count                       = length(var.DB_COMPONENTS)
+  ami                         = "ami-0bb6af715826253bf"
+  instance_type               = "t3.micro"
+  vpc_security_group_ids      = ["sg-0bcba096b73fa353d"]
+  tags                        = {
+    Name                      = "${element(var.DB_COMPONENTS, count.index)}-${var.ENV}"
   }
-}*/
+}
+
 
 resource "aws_route53_record" "app_records" {
   count                   = length(var.APP_COMPONENTS)
@@ -55,7 +62,7 @@ resource "aws_route53_record" "app_records" {
   type                    = "A"
   zone_id                 = "Z02280072PQMTU5GAFQA"
   ttl                     = 300
-  records                 = [element(aws_spot_instance_request.app_cheap_worker.*.private_ip, count.index)]
+  records                 = [element(aws_instance.app-instances.*.private_ip, count.index)]
 }
 
 resource "aws_route53_record" "db_records" {
@@ -64,7 +71,7 @@ resource "aws_route53_record" "db_records" {
   type                    = "A"
   zone_id                 = "Z02280072PQMTU5GAFQA"
   ttl                     = 300
-  records                 = [element(aws_spot_instance_request.db_cheap_worker.*.private_ip, count.index)]
+  records                 = [element(aws_instance.db-instances.*.private_ip, count.index)]
 }
 #locals {
 #  LENGTH                  = length(var.COMPONENTS)
@@ -92,7 +99,7 @@ resource "aws_route53_record" "db_records" {
 
 ## Approach TWO ##############
 locals {
-  COMPONENTS = concat(aws_spot_instance_request.db_cheap_worker.*.private_ip, aws_spot_instance_request.app_cheap_worker.*.private_ip)
+  COMPONENTS = concat(aws_instance.db-instances.*.private_ip, aws_instance.app-instances.*.private_ip)
 }
 
 resource "local_file" "inventory-file" {
