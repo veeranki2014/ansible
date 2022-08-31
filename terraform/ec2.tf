@@ -16,17 +16,10 @@ resource "aws_spot_instance_request" "app_cheap_worker" {
 resource "aws_ec2_tag" "app-name-tag" {
   count                     = length(var.APP_COMPONENTS)
   resource_id               = element(aws_spot_instance_request.app_cheap_worker.*.spot_instance_id, count.index)
-  key                       = "Name"
-  value                     = "${element(var.APP_COMPONENTS, count.index)}-${var.ENV}"
-  key                       = "Monitor"
-  value                     = "yes"
-}
-
-resource "aws_ec2_tag" "app-name-tag" {
-  count                     = length(var.APP_COMPONENTS)
-  resource_id               = element(aws_spot_instance_request.app_cheap_worker.*.spot_instance_id, count.index)
-  key                       = "Monitor"
-  value                     = "yes"
+  tags                      = {
+    Name                    = "${element(var.APP_COMPONENTS, count.index)}-${var.ENV}"
+    Monitor                 = "yes"
+  }
 }
 
 resource "aws_spot_instance_request" "db_cheap_worker" {
@@ -44,8 +37,9 @@ resource "aws_spot_instance_request" "db_cheap_worker" {
 resource "aws_ec2_tag" "db-name-tag" {
   count                     = length(var.DB_COMPONENTS)
   resource_id               = element(aws_spot_instance_request.db_cheap_worker.*.spot_instance_id, count.index)
-  key                       = "Name"
-  value                     = "${element(var.DB_COMPONENTS, count.index)}-${var.ENV}"
+  tags                      = {
+    Name                    = "${element(var.DB_COMPONENTS, count.index)}-${var.ENV}"
+  }
 }
 
 resource "aws_route53_record" "app_records" {
