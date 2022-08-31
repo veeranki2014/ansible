@@ -7,10 +7,10 @@ resource "aws_spot_instance_request" "app_cheap_worker" {
   vpc_security_group_ids  = ["sg-0bcba096b73fa353d"]
   wait_for_fulfillment    = true
 
-  tags                    = {
-    Name                  = "${element(var.APP_COMPONENTS,count.index )}-${var.ENV}"
-    Monitor               = "yes"
-  }
+    tags                    = {
+      Name                  = "${element(var.APP_COMPONENTS,count.index )}-${var.ENV}"
+      Monitor               = "yes"
+    }
 }
 
 resource "aws_spot_instance_request" "db_cheap_worker" {
@@ -21,9 +21,9 @@ resource "aws_spot_instance_request" "db_cheap_worker" {
   vpc_security_group_ids  = ["sg-0bcba096b73fa353d"]
   wait_for_fulfillment    = true
 
-  tags                    = {
-    Name                  = "${element(var.DB_COMPONENTS,count.index )}-${var.ENV}"
-  }
+    tags                    = {
+      Name                  = "${element(var.DB_COMPONENTS,count.index )}-${var.ENV}"
+    }
 }
 
 resource "aws_route53_record" "app_records" {
