@@ -28,7 +28,7 @@ resource "aws_spot_instance_request" "db_cheap_worker" {
 
 resource "aws_route53_record" "app_records" {
   count                   = length(var.APP_COMPONENTS)
-  name                    = "{element(var.APP_COMPONENTS,count.index )}-${var.ENV}"
+  name                    = "${element(var.APP_COMPONENTS,count.index )}-${var.ENV}"
   type                    = "A"
   zone_id                 = "Z02280072PQMTU5GAFQA"
   ttl                     = 300
@@ -37,7 +37,7 @@ resource "aws_route53_record" "app_records" {
 
 resource "aws_route53_record" "db_records" {
   count                   = length(var.DB_COMPONENTS)
-  name                    = "{element(var.DB_COMPONENTS,count.index )}-${var.ENV}"
+  name                    = "${element(var.DB_COMPONENTS,count.index )}-${var.ENV}"
   type                    = "A"
   zone_id                 = "Z02280072PQMTU5GAFQA"
   ttl                     = 300
