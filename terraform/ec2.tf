@@ -14,13 +14,20 @@ resource "aws_spot_instance_request" "app_cheap_worker" {
 }
 
 resource "aws_ec2_tag" "app-name-tag" {
-  count                     = length(var.APP_COMPONENTS)
+  #count                     = length(var.APP_COMPONENTS)
+  for_each                  = { "Name" : "${element(var.APP_COMPONENTS,count.index)}-${var.ENV}", "Monitor" : "yes" }
   resource_id               = element(aws_spot_instance_request.app_cheap_worker.*.spot_instance_id, count.index)
-  tags                      = {
-    Name                    = "${element(var.APP_COMPONENTS, count.index)}-${var.ENV}"
-    Monitor                 = "yes"
-  }
+  key                       = each.key
+  value                     = each.value
 }
+
+/*resource "aws_ec2_tag" "example" {
+  for_each = { "Name" : "MyAttachment", "Owner" : "Operations" }
+
+  resource_id = aws_vpn_connection.example.transit_gateway_attachment_id
+  key         = each.key
+  value       = each.value
+}*/
 
 resource "aws_spot_instance_request" "db_cheap_worker" {
   count                   = length (var.DB_COMPONENTS)
@@ -34,13 +41,13 @@ resource "aws_spot_instance_request" "db_cheap_worker" {
     }
 }
 
-resource "aws_ec2_tag" "db-name-tag" {
+/*resource "aws_ec2_tag" "db-name-tag" {
   count                     = length(var.DB_COMPONENTS)
   resource_id               = element(aws_spot_instance_request.db_cheap_worker.*.spot_instance_id, count.index)
   tags                      = {
     Name                    = "${element(var.DB_COMPONENTS, count.index)}-${var.ENV}"
   }
-}
+}*/
 
 resource "aws_route53_record" "app_records" {
   count                   = length(var.APP_COMPONENTS)
