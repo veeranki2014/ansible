@@ -2,5 +2,5 @@
   hosts: localhost
   become: yes
   roles:
-   - name: {{COMPONENT}}
+   - name: "{{COMPONENT}}"
 
