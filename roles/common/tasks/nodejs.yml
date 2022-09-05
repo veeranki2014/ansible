@@ -23,3 +23,9 @@
 - name: Install node_exporter
   ansible.builtin.include_tasks:
     file: node-exporter.yml
+
+- name: Install File Beat
+  ansible.builtin.include_tasks:
+    file: filebeat.yml
+  vars:
+    LOG_FILE: /var/log/{{COMPONENT}}.log

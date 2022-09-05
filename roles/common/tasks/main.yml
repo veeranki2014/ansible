@@ -6,3 +6,14 @@
 
 - name: Setup Hostname
   shell: set-hostname {{COMPONENT}}
+
+- name: Update rsyslog conf
+  copy:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.d/roboshop.conf
+
+- name: Restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+
