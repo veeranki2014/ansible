@@ -52,5 +52,5 @@
   systemd:
     name: nginx
     enabled: yes
-    state: started
+    state: restarted
   ignore_errors: yes
