@@ -19,8 +19,8 @@
     dest: /usr/share/nginx/html/
     remote_src: yes
 
-- name: update log format fro ELK
-  ansible.builtin.copy:
+- name: Update Main Nginx Config
+  copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
@@ -30,10 +30,11 @@
 #    src: roboshop.conf
 #    dest: /etc/nginx/default.d/roboshop.conf
 
-- name: upload roboshop configuration file
+- name: Update roboshop configuration file
   template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
+  when: COMPONENT is not defined
 
 - name: Install Node Exporter
   ansible.builtin.include_role:
