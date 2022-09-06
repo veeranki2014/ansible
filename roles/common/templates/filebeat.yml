@@ -12,6 +12,9 @@ filebeat.inputs:
   paths:
     - {{LOG_FILE}}
     #- c:\programdata\elasticsearch\logs\*
+  fields:
+    component: {{COMPONENT}}
+    STRUCTURED: {{STRUCTURED}}
 
 # ============================== Filebeat modules ==============================
 
