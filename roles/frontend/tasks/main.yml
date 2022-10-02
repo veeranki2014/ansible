@@ -36,6 +36,12 @@
     dest: /etc/nginx/default.d/roboshop.conf
   when: COMPONENT is not defined
 
+- name: Update roboshop configuration file
+  template:
+    src: roboshop-lb.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+  when: COMPONENT is defined
+
 - name: Install Node Exporter
   ansible.builtin.include_role:
     name: common
